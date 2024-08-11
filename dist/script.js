@@ -78,22 +78,32 @@ const modals = () => {
     const trigger = document.querySelectorAll(triggerSelector);
     const modal = document.querySelector(modalSelector);
     const close = document.querySelector(closeSelector);
+    const windows = document.querySelectorAll('[data-modal]');
     trigger.forEach(item => item.addEventListener('click', e => {
       if (e.target) {
         e.preventDefault(); //мы проверили что на нашу кнопку действительно нажали
       }
+      windows.forEach(item => {
+        item.style.display = 'none';
+      });
       modal.style.display = 'block'; //после этого открываем модальное окно
       document.body.style.overflow = 'hidden';
       //document.body.classList.add('modal-open');
     }));
     close.addEventListener('click', () => {
       //события при нажатии на крестик модального окна
+      windows.forEach(item => {
+        item.style.display = 'none';
+      });
       modal.style.display = 'none';
       document.body.style.overflow = '';
       //document.body.classList.remove('modal-open');
     });
     modal.addEventListener('click', e => {
       if (e.target === modal) {
+        windows.forEach(item => {
+          item.style.display = 'none';
+        });
         modal.style.display = 'none';
         document.body.style.overflow = '';
         //document.body.classList.remove('modal-open');

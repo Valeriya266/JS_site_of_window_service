@@ -1,8 +1,9 @@
 const modals = () => {
     function bindModal(triggerSelector, modalSelector, closeSelector) {
-    const trigger = document.querySelectorAll(triggerSelector);
-    const modal = document.querySelector(modalSelector);
-    const close = document.querySelector(closeSelector);
+        const trigger = document.querySelectorAll(triggerSelector);
+        const modal = document.querySelector(modalSelector);
+        const close = document.querySelector(closeSelector);
+        const windows = document.querySelectorAll('[data-modal]');
 
 
         trigger.forEach(item => 
@@ -11,6 +12,10 @@ const modals = () => {
                e.preventDefault(); //мы проверили что на нашу кнопку действительно нажали
             }
 
+            windows.forEach(item => {
+                item.style.display = 'none';
+            })
+
             modal.style.display = 'block'; //после этого открываем модальное окно
             document.body.style.overflow = 'hidden';
             //document.body.classList.add('modal-open');
@@ -18,6 +23,10 @@ const modals = () => {
         );
 
         close.addEventListener('click', () => { //события при нажатии на крестик модального окна
+            windows.forEach(item => {
+                item.style.display = 'none';
+            })
+
             modal.style.display = 'none';
             document.body.style.overflow = '';
             //document.body.classList.remove('modal-open');
@@ -25,6 +34,10 @@ const modals = () => {
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
+                windows.forEach(item => {
+                    item.style.display = 'none';
+                })
+                
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
                 //document.body.classList.remove('modal-open');
