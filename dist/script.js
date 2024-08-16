@@ -28,6 +28,29 @@ const changeModalState = state => {
 
 /***/ }),
 
+/***/ "./src/js/modules/checkNumInputs.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/checkNumInputs.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const checkNumInputs = selector => {
+  const numInputs = document.querySelectorAll(selector);
+  numInputs.forEach(item => {
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/\D/, '');
+    });
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (checkNumInputs);
+
+/***/ }),
+
 /***/ "./src/js/modules/forms.js":
 /*!*********************************!*\
   !*** ./src/js/modules/forms.js ***!
@@ -39,15 +62,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/js/modules/checkNumInputs.js");
+
 const forms = () => {
   const forms = document.querySelectorAll('form'),
-    inputs = document.querySelectorAll('input'),
-    phoneInputs = document.querySelectorAll('input[name="user-phone"]');
-  phoneInputs.forEach(item => {
-    item.addEventListener('input', () => {
-      item.value = item.value.replace(/\D/, '');
-    });
-  });
+    inputs = document.querySelectorAll('input');
+  (0,_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('input[name="user-phone"]');
   const message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
