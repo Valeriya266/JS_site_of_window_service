@@ -1,6 +1,4 @@
-const timer = () => {
-    
-    const deadline = '2023-05-20';
+const timer = (selector, deadline) => {
 
     function getTimeRemaining (endtime) {
         let days, hours, minutes, seconds;
@@ -48,10 +46,10 @@ const timer = () => {
         function updateClock() {
             const t = getTimeRemaining(endtime);
 
-            days.innerHTML = getZero(t.days),
-            hours.innerHTML = getZero(t.hours),
-            minutes.innerHTML = getZero(t.minutes),
-            seconds.innerHTML  = getZero(t.seconds);
+            days.textContent = getZero(t.days),
+            hours.textContent = getZero(t.hours),
+            minutes.textContent = getZero(t.minutes),
+            seconds.textContent  = getZero(t.seconds);
 
             if(t.total <= 0) {
                 clearInterval(timeInterval);
@@ -60,5 +58,7 @@ const timer = () => {
     }
 
 
-    setClock('.timer', deadline);
-}
+    setClock(selector, deadline);
+};
+
+export default timer;
