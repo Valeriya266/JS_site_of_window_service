@@ -206,17 +206,21 @@ const modals = () => {
     const modal = document.querySelector(modalSelector);
     const close = document.querySelector(closeSelector);
     const windows = document.querySelectorAll('[data-modal]');
-    trigger.forEach(item => item.addEventListener('click', e => {
-      if (e.target) {
-        e.preventDefault(); //мы проверили что на нашу кнопку действительно нажали
-      }
-      windows.forEach(item => {
-        item.style.display = 'none';
+    const scroll = calcScroll();
+    trigger.forEach(item => {
+      item.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault(); //мы проверили что на нашу кнопку действительно нажали
+        }
+        windows.forEach(item => {
+          item.style.display = 'none';
+        });
+        modal.style.display = 'block'; //после этого открываем модальное окно
+        document.body.style.overflow = 'hidden';
+        //document.body.classList.add('modal-open');
+        document.body.style.marginRight = `${scroll}px`;
       });
-      modal.style.display = 'block'; //после этого открываем модальное окно
-      document.body.style.overflow = 'hidden';
-      //document.body.classList.add('modal-open');
-    }));
+    });
     close.addEventListener('click', () => {
       //события при нажатии на крестик модального окна
       windows.forEach(item => {
@@ -225,6 +229,7 @@ const modals = () => {
       modal.style.display = 'none';
       document.body.style.overflow = '';
       //document.body.classList.remove('modal-open');
+      document.body.style.marginRight = `0px`;
     });
     modal.addEventListener('click', e => {
       if (e.target === modal && closeClickOverlay) {
@@ -234,6 +239,7 @@ const modals = () => {
         modal.style.display = 'none';
         document.body.style.overflow = '';
         //document.body.classList.remove('modal-open');
+        document.body.style.marginRight = `0px`;
       }
     });
   }
@@ -244,6 +250,18 @@ const modals = () => {
       document.body.style.overflow = 'hidden';
     }, time);
   }
+  function calcScroll() {
+    let div = document.createElement('div');
+    div.style.width = '50px';
+    div.dtyle.height = '50px';
+    div.style.overflowY = 'scroll';
+    div.style.visibility = 'hidden';
+    document.body.append(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
+  }
+
   //наша кнопка "вызвать замерщика" '.popup_engineer_btn'
   //наше модальное окно '.popup_engineer'
   //крестик на модальном окне '.popup_engineer .popup_close'
