@@ -162,7 +162,7 @@ const images = () => {
     workSection = document.querySelector('.works'),
     //секция с картинками
     bigImage = document.createElement('img');
-  imgPopup.classList.add('.popup'); //из пустого div сделали модалку с помощью класса
+  imgPopup.classList.add('popup'); //из пустого div сделали модалку с помощью класса
   workSection.appendChild(imgPopup); //поместили модалку на место секции с картинками
 
   //Отцентровали наше модальное окно 
